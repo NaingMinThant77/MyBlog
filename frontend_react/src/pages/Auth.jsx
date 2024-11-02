@@ -17,7 +17,7 @@ export const action = async ({ request }) => {//back of ? - searchParams
     const mode = searchParams.get("mode")
 
     if (mode !== 'login' && mode !== 'signup') {
-        throw new Error("");
+        throw json({ message: "Invalid mode." }, { status: 400 });
     }
 
     const data = await request.formData();
