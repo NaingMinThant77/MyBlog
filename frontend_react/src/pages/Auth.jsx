@@ -27,7 +27,7 @@ export const action = async ({ request }) => {//back of ? - searchParams
         password: data.get("password")
     }
 
-    const response = await fetch(`${process.env.REACT_APP_DOMAIN}/${mode}`, {
+    const response = await fetch(`${import.meta.env.VITE__DOMAIN}/${mode}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(authData)

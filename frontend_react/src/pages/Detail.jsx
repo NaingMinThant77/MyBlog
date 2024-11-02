@@ -19,7 +19,7 @@ export default Detail;
 
 export const loader = async ({ params }) => {
     const { id } = params;
-    const response = await fetch(`${process.env.REACT_APP_DOMAIN}/posts/${id}`);
+    const response = await fetch(`${import.meta.env.VITE__DOMAIN}/posts/${id}`);
 
     if (!response.ok) {
         throw json({ message: "Post not found" }, { status: 404 });
@@ -31,7 +31,7 @@ export const loader = async ({ params }) => {
 
 export const action = async ({ request, params }) => {
     const id = params.id;
-    const response = await fetch(`${process.env.REACT_APP_DOMAIN}/posts/${id}`, {
+    const response = await fetch(`${import.meta.env.VITE__DOMAIN}/posts/${id}`, {
         method: request.method,
         headers: {
             Authorization: "Bearer " + getToken(),

@@ -71,12 +71,12 @@ export const action = async ({ request, params }) => {
     }
 
     // let url = "http://localhost:8080/posts";
-    let url = `${process.env.REACT_APP_DOMAIN}/posts`;
+    let url = `${import.meta.env.VITE__DOMAIN}/posts`;
     const method = request.method;
 
     if (method === "PATCH") {
         const id = params.id;
-        url = `${process.env.REACT_APP_DOMAIN}/posts/${id}`
+        url = `${import.meta.env.VITE__DOMAIN}/posts/${id}`
     }
 
     const response = await fetch(url, {
