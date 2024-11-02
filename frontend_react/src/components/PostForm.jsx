@@ -76,7 +76,7 @@ export const action = async ({ request, params }) => {
 
     if (method === "PATCH") {
         const id = params.id;
-        url = `${process.env.DOMAIN}/posts/${id}`
+        url = `${process.env.REACT_APP_DOMAIN}/posts/${id}`
     }
 
     const response = await fetch(url, {
