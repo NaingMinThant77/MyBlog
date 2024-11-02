@@ -9,6 +9,8 @@ const Main = () => {
   const submit = useSubmit();
   const { state } = useNavigation();
 
+  console.log(process.env.REACT_APP_DOMAIN)
+
   useEffect(() => {
     if (!token) { return; }
 

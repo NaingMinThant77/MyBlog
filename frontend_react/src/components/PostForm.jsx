@@ -70,12 +70,13 @@ export const action = async ({ request, params }) => {
         date: data.get("date"),
     }
 
-    let url = "http://localhost:8080/posts";
+    // let url = "http://localhost:8080/posts";
+    let url = `${process.env.REACT_APP_DOMAIN}/posts`;
     const method = request.method;
 
     if (method === "PATCH") {
         const id = params.id;
-        url = `http://localhost:8080/posts/${id}`
+        url = `${process.env.DOMAIN}/posts/${id}`
     }
 
     const response = await fetch(url, {
