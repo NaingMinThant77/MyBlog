@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Link, useActionData } from 'react-router-dom'
+import { Form, Link, useActionData, useNavigation } from 'react-router-dom'
 import { ArrowLeftIcon } from '@heroicons/react/24/solid'
 import uuid from 'react-uuid';
 import { redirect, json } from 'react-router-dom';
@@ -7,6 +7,8 @@ import { getToken } from '../util/auth';
 
 function PostForm({ header, btnText, oldPostData, method }) {
     const data = useActionData();
+    const navigaion = useNavigation();
+    const isSubmitting = navigaion.state === "submitting";
 
     return (
         <section className='form-section'>
@@ -42,7 +44,8 @@ function PostForm({ header, btnText, oldPostData, method }) {
                     <label htmlFor="form-description">Description</label>
                     <textarea name="description" id="form-description" rows={5} cols={30} required defaultValue={oldPostData ? oldPostData.description : ''}></textarea>
                 </div>
-                <button className='btn'>{btnText}</button>
+                <button className='btn' disabled={isSubmitting}>{isSubmitting ? "Submitting" : btnText}</button>
+                {/* <button className='btn'>{btnText}</button> */}
             </Form>
         </section>
     )
@@ -98,3 +101,5 @@ export const action = async ({ request, params }) => {
     return redirect("/");
 
 }
+
+//https://myblog-frontend-ma1o.onrender.com
