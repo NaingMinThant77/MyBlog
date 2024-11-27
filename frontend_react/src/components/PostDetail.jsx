@@ -15,23 +15,34 @@ const PostDetail = ({ post }) => {
   }
 
   return (
-    <section className='details'>
-      <div className='detail-header'>
+    <section className="p-6 max-w-2xl mx-auto bg-white shadow-lg rounded-lg mt-8">
+      <div className="flex justify-between items-center mb-4">
         <div>
-          <p className='details-title'>{title.toUpperCase()}</p>
-          <p className='date'><CalendarDaysIcon className='clockIcon' /><span>{date}</span></p>
+          <h1 className="text-2xl font-bold">{title}</h1>
+          <p className="text-gray-500 flex items-center">
+            <CalendarDaysIcon className="h-5 w-5 mr-2" />
+            <span>{date}</span>
+          </p>
         </div>
-        <Link to={"/"}><ArrowLeftIcon className='arrowIcon' /></Link>
+        <Link to="/" className="text-indigo-600 hover:underline">
+          <ArrowLeftIcon className="h-6 w-6" />
+        </Link>
       </div>
-      <img src={image} alt={title} />
-      <p className='decription'>{description}</p>
-      {
-        isToken && <div className='detail-footer'>
-          <Link to={`edit-post`}><p className='btn sm'>Edit</p></Link>
-          <p className='btn sm' onClick={postDeleteHandler}>Delete</p>
+      <img src={image} alt={title} className="w-full object-cover rounded-lg mb-4" />
+      <p className="text-gray-700 mb-6 text-justify">&emsp;&emsp;{description}</p>
+      {isToken && (
+        <div className="flex space-x-4 justify-end">
+          <button
+            className="px-4 py-2 border border-red-600 text-red-600 rounded-md hover:bg-red-100"
+            onClick={postDeleteHandler}
+          >
+            Delete
+          </button>
+          <Link to="edit-post" className="px-4 py-2 border border-indigo-600 text-indigo-600 rounded-md hover:bg-indigo-100">
+            Edit
+          </Link>
         </div>
-      }
-      <hr />
+      )}
     </section>
   )
 }

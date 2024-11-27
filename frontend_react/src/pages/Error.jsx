@@ -19,11 +19,14 @@ const Error = () => {
     }
 
     return (
-        <section className='errorPage'>
-            <div><ExclamationTriangleIcon className='icon' />
-                <h1>{title}</h1>
-                <p>{message}</p>
-                <Link to={"/"}><p className='btn er-btn'>Go back home</p></Link>
+        <section className="min-h-screen flex flex-col items-center justify-center bg-mediumBlue text-white">
+            <div className="bg-darkBlue p-6 rounded-lg text-center shadow-lg">
+                <div className='flex justify-center items-center'><ExclamationTriangleIcon className="w-32 h-32 mb-4 text-lightBlue" /></div>
+                <h1 className="text-3xl font-bold mb-2">{title}</h1>
+                <p className="mb-4">{message}</p>
+                <Link to="/" className="px-4 py-2 bg-lightBlue text-darkBlue rounded-lg hover:bg-white transition">
+                    Go back home
+                </Link>
             </div>
         </section>
     )

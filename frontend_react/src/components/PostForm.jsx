@@ -11,41 +11,79 @@ function PostForm({ header, btnText, oldPostData, method }) {
     const isSubmitting = navigaion.state === "submitting";
 
     return (
-        <section className='form-section'>
-            <div className='detail-header'>
-                <p>{header}</p>
-                <Link to={"/"}><ArrowLeftIcon className='arrowIcon' /></Link>
+        <section className="p-6 w-96 mx-auto bg-white shadow-lg rounded-lg mt-8">
+            <div className="flex justify-between items-center mb-6">
+                <h1 className="text-2xl font-bold">{header}</h1>
+                <Link to="/" className="text-indigo-600 hover:underline">
+                    <ArrowLeftIcon className="h-6 w-6" />
+                </Link>
             </div>
-            {
-                data && data.errors && (
-                    <ul>
-                        {
-                            Object.values(data.errors).map(err => (
-                                <li key={err}>{err}</li>
-                            ))
-                        }
-                    </ul>
-                )
-            }
-            <Form method={method}>
-                <div className='form-input'>
-                    <label htmlFor="form-title">Title</label>
-                    <input type="text" id='form-title' name='title' required defaultValue={oldPostData ? oldPostData.title : ''} />
+            {data && data.errors && (
+                <ul className="text-red-500 text-sm mb-4">
+                    {Object.values(data.errors).map((err) => (
+                        <li key={err}>{err}</li>
+                    ))}
+                </ul>
+            )}
+            <Form method={method} className="space-y-5">
+                <div>
+                    <label htmlFor="form-title" className="block text-sm font-medium text-gray-700">
+                        Title
+                    </label>
+                    <input
+                        type="text"
+                        id="form-title"
+                        name="title"
+                        required
+                        defaultValue={oldPostData?.title || ''}
+                        className="mt-1 block w-full border rounded-md p-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    />
                 </div>
                 <div>
-                    <label htmlFor="form-image">Image</label>
-                    <input type="url" id='form-image' name='image' required defaultValue={oldPostData ? oldPostData.image : ''} />
+                    <label htmlFor="form-image" className="block text-sm font-medium text-gray-700">
+                        Image
+                    </label>
+                    <input
+                        type="url"
+                        id="form-image"
+                        name="image"
+                        required
+                        defaultValue={oldPostData?.image || ''}
+                        className="mt-1 block w-full border rounded-md p-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    />
                 </div>
                 <div>
-                    <label htmlFor="form-date">Date</label>
-                    <input type="date" id='form-date' name='date' required defaultValue={oldPostData ? formatDate(oldPostData.date) : ''} />
+                    <label htmlFor="form-date" className="block text-sm font-medium text-gray-700">
+                        Date
+                    </label>
+                    <input
+                        type="date"
+                        id="form-date"
+                        name="date"
+                        required
+                        defaultValue={oldPostData?.date || ''}
+                        className="mt-1 block w-full border rounded-md p-2 focus:ring-indigo-500 focus:border-indigo-500 "
+                    />
                 </div>
                 <div>
-                    <label htmlFor="form-description">Description</label>
-                    <textarea name="description" id="form-description" rows={5} cols={30} required defaultValue={oldPostData ? oldPostData.description : ''}></textarea>
+                    <label htmlFor="form-description" className="block text-sm font-medium text-gray-700">
+                        Description
+                    </label>
+                    <textarea
+                        id="form-description"
+                        name="description"
+                        rows="4"
+                        required
+                        defaultValue={oldPostData?.description || ''}
+                        className="mt-1 block w-full border rounded-md p-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    />
                 </div>
-                <button className='btn' disabled={isSubmitting}>{isSubmitting ? "Submitting" : btnText}</button>
-                {/* <button className='btn'>{btnText}</button> */}
+                <button
+                    className="w-full py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 disabled:bg-indigo-300"
+                    disabled={isSubmitting}
+                >
+                    {isSubmitting ? "Submitting..." : btnText}
+                </button>
             </Form>
         </section>
     )
@@ -53,13 +91,13 @@ function PostForm({ header, btnText, oldPostData, method }) {
 
 export default PostForm
 
-function formatDate(dateString) {
-    const date = new Date(dateString);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Add leading zero to month
-    const day = String(date.getDate()).padStart(2, '0'); // Add leading zero to day
-    return `${year}-${month}-${day}`;
-}
+// function formatDate(dateString) {
+//     const date = new Date(dateString);
+//     const year = date.getFullYear();
+//     const month = String(date.getMonth() + 1).padStart(2, '0'); // Add leading zero to month
+//     const day = String(date.getDate()).padStart(2, '0'); // Add leading zero to day
+//     return `${year}-${month}-${day}`;
+// }
 
 export const action = async ({ request, params }) => {
     const data = await request.formData();

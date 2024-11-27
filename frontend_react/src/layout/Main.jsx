@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
-import { Outlet, useLoaderData, useSubmit, useNavigation } from 'react-router-dom'
-import Navbar from '../components/Navbar'
+import React, { useEffect } from 'react';
+import { Outlet, useLoaderData, useSubmit, useNavigation } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 import { getExpDuration } from '../util/auth';
 import Loader from '../components/Loader';
 
@@ -9,28 +9,31 @@ const Main = () => {
   const submit = useSubmit();
   const { state } = useNavigation();
 
-  useEffect(() => {
-    if (!token) { return; }
 
-    if (token === "TOKEN EXP") {
-      submit(null, { action: "/logout", method: "post" })
+  useEffect(() => {
+    if (!token) return;
+
+    if (token === 'TOKEN EXP') {
+      submit(null, { action: '/logout', method: 'post' });
     }
 
-    const duration = getExpDuration(); //calculate time
+    const duration = getExpDuration();
     setTimeout(() => {
-      submit(null, { action: "/logout", method: "post" })
-    }, [duration]) //setTimeout will work when duration is 0
-    console.log(duration)
-  }, [token, submit])
+      submit(null, { action: '/logout', method: 'post' });
+    }, duration);
+  }, [token, submit]);
 
   return (
-    <section className='main'>
+    <section className="flex flex-col min-h-screen bg-lightBlue text-darkBlue">
       <Navbar />
-      {
-        state === "loading" ? (<Loader />) : (<Outlet />)
-      }
-    </section>
-  )
-}
 
-export default Main
+      <div
+        className={`flex-grow flex items-center justify-center transition-all mt-3 `}
+      >
+        {state === 'loading' ? <Loader /> : <Outlet />}
+      </div>
+    </section>
+  );
+};
+
+export default Main;

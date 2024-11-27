@@ -10,11 +10,13 @@ import Error from './pages/Error'
 import Auth, { action as authAction } from './pages/Auth'
 import { loader as logoutLoader } from './pages/Logout'
 import { checkTokenLoader, tokenLoader } from './util/auth'
+import { PostProvider } from './util/PostContext'
+
 
 const App = () => {
   const router = createBrowserRouter([
     {
-      path: "/", element: <Main />, errorElement: <Error />, id: "root", loader: tokenLoader, children: [
+      path: "/", element: <PostProvider><Main /></PostProvider>, errorElement: <Error />, id: "root", loader: tokenLoader, children: [
         { index: true, element: <Posts />, loader: postsLoader },
         { path: "/create-post", element: <Create />, action: postCreateAction, loader: checkTokenLoader },
         {
