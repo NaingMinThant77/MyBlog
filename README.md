@@ -9,7 +9,7 @@
 
 ## Deployment
 
-To use this project run on browser
+To use this project run on browser (please wait a while, it can delay on some computer)
 
 ```bash
   https://myblogapp-oq3r.onrender.com/
